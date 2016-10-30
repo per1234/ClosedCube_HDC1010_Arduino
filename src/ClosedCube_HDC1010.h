@@ -51,7 +51,7 @@ public:
 	void begin(uint8_t address);
 	uint16_t readManufacturerId(); // 0x5449 ID of Texas Instruments
 	uint16_t readDeviceId(); // 0x1000 ID of the device
-	
+
 	float readTemperature();
 	float readHumidity();
 
@@ -61,8 +61,8 @@ public:
 private:
 	uint8_t _address;
 	uint16_t readData(uint8_t pointer);
-	
-	const uint16_t pow16 = pow(2, 16);
+
+	const double pow16 = pow(2, 16);
 };
 
 #endif

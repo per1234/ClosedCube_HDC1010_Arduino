@@ -79,9 +79,9 @@ uint16_t ClosedCube_HDC1010::readData(uint8_t pointer) {
 	Wire.beginTransmission(_address);
 	Wire.write(pointer);
 	Wire.endTransmission();
-	
+
 	delay(10);
-	Wire.requestFrom(_address, 2);
+	Wire.requestFrom(_address, (uint8_t)2);
 
 	byte msb = Wire.read();
 	byte lsb = Wire.read();
