@@ -44,6 +44,20 @@ typedef enum {
 	SERIAL_ID_LAST = 0xFD,
 } HDC1010_Pointers;
 
+typedef union {
+	uint8_t rawData;
+	struct {
+		uint8_t SoftwareReeset : 1;
+		uint8_t ReservedAgain : 1;
+		uint8_t Heater : 1;
+		uint8_t ModeOfAcquisition : 1;
+		uint8_t BatteryStatus : 1;
+		uint8_t TemperatureMeasurementResolution : 1;
+		uint8_t HumidityMeasurementResolution : 2;
+	};
+} HDC1010_Registers;
+
+
 class ClosedCube_HDC1010 {
 public:
 	ClosedCube_HDC1010();
@@ -51,6 +65,12 @@ public:
 	void begin(uint8_t address);
 	uint16_t readManufacturerId(); // 0x5449 ID of Texas Instruments
 	uint16_t readDeviceId(); // 0x1000 ID of the device
+
+	HDC1010_Registers readRegister();	
+	void writeRegister(HDC1010_Registers reg);
+
+	void setHeaterOn();
+	void setHeaterOff();
 
 	float readTemperature();
 	float readHumidity();

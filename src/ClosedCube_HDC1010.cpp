@@ -49,6 +49,18 @@ void ClosedCube_HDC1010::begin(uint8_t address) {
 
 }
 
+void ClosedCube_HDC1010::setHeaterOn() {
+	HDC1010_Registers reg = readRegister();
+	reg.Heater = 1;
+	writeRegister(reg);
+}
+
+void ClosedCube_HDC1010::setHeaterOff() {
+	HDC1010_Registers reg = readRegister();
+	reg.Heater = 0;
+	writeRegister(reg);
+}
+
 float ClosedCube_HDC1010::readT() {
 	return readTemperature();
 }
@@ -69,6 +81,20 @@ float ClosedCube_HDC1010::readHumidity() {
 
 uint16_t ClosedCube_HDC1010::readManufacturerId() {
 	return readData(MANUFACTURER_ID);
+}
+
+HDC1010_Registers ClosedCube_HDC1010::readRegister() {
+	HDC1010_Registers reg;
+	reg.rawData = (readData(CONFIGURATION) >> 8);
+	return reg;
+}
+
+void ClosedCube_HDC1010::writeRegister(HDC1010_Registers reg) {
+	Wire.beginTransmission(_address);
+	Wire.write(CONFIGURATION);
+	Wire.write(reg.rawData);
+	Wire.write(0x00);
+	Wire.endTransmission();
 }
 
 uint16_t ClosedCube_HDC1010::readDeviceId() {
