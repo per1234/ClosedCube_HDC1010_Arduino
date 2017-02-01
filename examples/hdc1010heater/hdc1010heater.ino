@@ -35,6 +35,12 @@ void setup()
 	Serial.println(hdc1010.readDeviceId(), HEX); // 0x1000 ID of the device
 	Serial.println();
 
+	uint8_t huTime = 10;
+	Serial.print("Heating up for approx. ");
+	Serial.print(huTime);
+	Serial.println(" seconds. Please wait...");
+
+	hdc1010.heatUp(huTime);
 	hdc1010.heatUp(10); // approx 10 sec
 	printRegister(hdc1010.readRegister());
 }
