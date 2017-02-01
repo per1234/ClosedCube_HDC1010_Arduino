@@ -32,8 +32,8 @@ void setup()
 	Serial.println(hdc1010.readManufacturerId(), HEX); // 0x5449 ID of Texas Instruments
 	Serial.print("Device ID=0x");
 	Serial.println(hdc1010.readDeviceId(), HEX); // 0x1000 ID of the device
-	
 	Serial.println();
+
 	printRegister(hdc1010.readRegister());
 
 }

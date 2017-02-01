@@ -20,8 +20,7 @@ readDeviceID KEYWORD2
 readRegister KEYWORD2
 writeRegister KEYWORD2
 
-setHeaterOn KEYWORD2
-setHeaterOff KEYWORD2
+heatUp KEYWORD2
 
 readTemperature KEYWORD2
 readHumidity KEYWORD2

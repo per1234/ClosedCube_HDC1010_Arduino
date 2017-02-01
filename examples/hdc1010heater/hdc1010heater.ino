@@ -16,8 +16,8 @@ MIT License
 
 **************************************************************************************/
 
-#include "ClosedCube_HDC1010.h"
 #include <Wire.h>
+#include "ClosedCube_HDC1010.h"
 
 ClosedCube_HDC1010 hdc1010;
 
@@ -25,6 +25,7 @@ void setup()
 {
 	Serial.begin(9600);
 	Serial.println("ClosedCube HDC1010 [Heater] Arduino Test");
+	Serial.println();
 
 	hdc1010.begin(0x41);
 
@@ -32,17 +33,20 @@ void setup()
 	Serial.println(hdc1010.readManufacturerId(), HEX); // 0x5449 ID of Texas Instruments
 	Serial.print("Device ID=0x");
 	Serial.println(hdc1010.readDeviceId(), HEX); // 0x1000 ID of the device
-	
 	Serial.println();
 
-	HDC1010_Registers reg = hdc1010.readRegister();
-	printRegister(reg);
-
-	// @TODO: Heater config setup
+	hdc1010.heatUp(10); // approx 10 sec
+	printRegister(hdc1010.readRegister());
 }
 
 void loop()
 {
+	Serial.print("HDC1010 T=");
+	Serial.print(hdc1010.readTemperature());
+	Serial.print("C, RH=");
+	Serial.print(hdc1010.readHumidity());
+	Serial.println("%");
+	delay(300);
 }
 
 void printRegister(HDC1010_Registers reg) {
@@ -50,7 +54,7 @@ void printRegister(HDC1010_Registers reg) {
 	Serial.println("------------------------------");
 	
 	Serial.print("Software reset bit: ");
-	Serial.print(reg.SoftwareReeset, BIN);
+	Serial.print(reg.SoftwareReset, BIN);
 	Serial.println(" (0=Normal Operation, 1=Software Reset)");
 
 	Serial.print("Heater: ");

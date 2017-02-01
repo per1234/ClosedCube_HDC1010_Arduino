@@ -6,7 +6,7 @@ Written by AA for ClosedCube
 
 The MIT License (MIT)
 
-Copyright (c) 2016 ClosedCube Limited
+Copyright (c) 2016-2017 ClosedCube Limited
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -47,13 +47,13 @@ typedef enum {
 typedef union {
 	uint8_t rawData;
 	struct {
-		uint8_t SoftwareReeset : 1;
-		uint8_t ReservedAgain : 1;
-		uint8_t Heater : 1;
-		uint8_t ModeOfAcquisition : 1;
-		uint8_t BatteryStatus : 1;
-		uint8_t TemperatureMeasurementResolution : 1;
 		uint8_t HumidityMeasurementResolution : 2;
+		uint8_t TemperatureMeasurementResolution : 1;
+		uint8_t BatteryStatus : 1;
+		uint8_t ModeOfAcquisition : 1;
+		uint8_t Heater : 1;
+		uint8_t ReservedAgain : 1;
+		uint8_t SoftwareReset : 1;
 	};
 } HDC1010_Registers;
 
@@ -69,8 +69,7 @@ public:
 	HDC1010_Registers readRegister();	
 	void writeRegister(HDC1010_Registers reg);
 
-	void setHeaterOn();
-	void setHeaterOff();
+	void heatUp(uint8_t seconds);
 
 	float readTemperature();
 	float readHumidity();

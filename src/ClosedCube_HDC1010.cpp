@@ -6,7 +6,7 @@ Written by AA for ClosedCube
 
 The MIT License (MIT)
 
-Copyright (c) 2016 ClosedCube Limited
+Copyright (c) 2016-2017 ClosedCube Limited
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -41,24 +41,12 @@ void ClosedCube_HDC1010::begin(uint8_t address) {
 	_address = address;
 	Wire.begin();
 
+	// heater:off, mode: T or RH, T 14 bit, RH 14 bit
 	Wire.beginTransmission(_address);
 	Wire.write(CONFIGURATION);
 	Wire.write(0x0);
 	Wire.write(0x0);
 	Wire.endTransmission();
-
-}
-
-void ClosedCube_HDC1010::setHeaterOn() {
-	HDC1010_Registers reg = readRegister();
-	reg.Heater = 1;
-	writeRegister(reg);
-}
-
-void ClosedCube_HDC1010::setHeaterOff() {
-	HDC1010_Registers reg = readRegister();
-	reg.Heater = 0;
-	writeRegister(reg);
 }
 
 float ClosedCube_HDC1010::readT() {
@@ -95,18 +83,38 @@ void ClosedCube_HDC1010::writeRegister(HDC1010_Registers reg) {
 	Wire.write(reg.rawData);
 	Wire.write(0x00);
 	Wire.endTransmission();
+	delay(10);
+}
+
+void ClosedCube_HDC1010::heatUp(uint8_t seconds) {
+	HDC1010_Registers reg = readRegister();
+	reg.Heater = 1;
+	writeRegister(reg);
+
+	uint8_t buf[4];
+	for (int i = 1; i < (seconds*66); i++) {
+		Wire.beginTransmission(_address);
+		Wire.write(0x00);
+		Wire.endTransmission();
+		delay(20);
+		Wire.requestFrom(_address, (uint8_t)4);
+		Wire.readBytes(buf, (size_t)4);
+	}
+	reg.Heater = 0;
+	writeRegister(reg);
 }
 
 uint16_t ClosedCube_HDC1010::readDeviceId() {
 	return readData(DEVICE_ID);
 }
 
+
 uint16_t ClosedCube_HDC1010::readData(uint8_t pointer) {
 	Wire.beginTransmission(_address);
 	Wire.write(pointer);
 	Wire.endTransmission();
 
-	delay(10);
+	delay(8); // 6.35/6.50 typ conversion time for T/RH sensors
 	Wire.requestFrom(_address, (uint8_t)2);
 
 	byte msb = Wire.read();
