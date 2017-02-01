@@ -1,8 +1,8 @@
 /**************************************************************************************
 
-This is example for ClosedCube HDC1010 Humidity and Temperature Sensor breakout booard
+This is a heater example for ClosedCube HDC1010 Humidity and Temperature Sensor breakout booard
 
-Initial Date: 20-Oct-2016
+Initial Date: 01-Feb-2017
 
 Hardware connections for Arduino Uno:
 VDD to 3.3V DC
@@ -24,7 +24,7 @@ ClosedCube_HDC1010 hdc1010;
 void setup()
 {
 	Serial.begin(9600);
-	Serial.println("ClosedCube HDC1010 Arduino Test");
+	Serial.println("ClosedCube HDC1010 [Heater] Arduino Test");
 
 	hdc1010.begin(0x41);
 
@@ -34,18 +34,15 @@ void setup()
 	Serial.println(hdc1010.readDeviceId(), HEX); // 0x1000 ID of the device
 	
 	Serial.println();
-	printRegister(hdc1010.readRegister());
 
+	HDC1010_Registers reg = hdc1010.readRegister();
+	printRegister(reg);
+
+	// @TODO: Heater config setup
 }
 
 void loop()
 {
-	Serial.print("T=");
-	Serial.print(hdc1010.readTemperature());
-	Serial.print("C, RH=");
-	Serial.print(hdc1010.readHumidity());
-	Serial.println("%");
-	delay(300);
 }
 
 void printRegister(HDC1010_Registers reg) {
