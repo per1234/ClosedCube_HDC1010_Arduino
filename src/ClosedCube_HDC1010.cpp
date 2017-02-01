@@ -89,6 +89,7 @@ void ClosedCube_HDC1010::writeRegister(HDC1010_Registers reg) {
 void ClosedCube_HDC1010::heatUp(uint8_t seconds) {
 	HDC1010_Registers reg = readRegister();
 	reg.Heater = 1;
+	reg.ModeOfAcquisition = 1;
 	writeRegister(reg);
 
 	uint8_t buf[4];
@@ -101,6 +102,7 @@ void ClosedCube_HDC1010::heatUp(uint8_t seconds) {
 		Wire.readBytes(buf, (size_t)4);
 	}
 	reg.Heater = 0;
+	reg.ModeOfAcquisition = 0;
 	writeRegister(reg);
 }
 
