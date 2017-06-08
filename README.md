@@ -11,7 +11,11 @@ This is breakout board for [Texas Instruments HDC1010](http://www.ti.com/product
 ---
 ### Where to Buy?
 
-<a href="https://www.tindie.com/stores/closedcube/?ref=offsite_badges&utm_source=sellers_closedcube&utm_medium=badges&utm_campaign=badge_medium"><img src="https://d2ss6ovg47m0r5.cloudfront.net/badges/tindie-mediums.png" alt="I sell on Tindie" width="150" height="78"></a>
+<img src="https://images-na.ssl-images-amazon.com/images/G/01/SellerCentral/legal/amazon-logo_black.png" width="145" height="70"/> <a href="https://www.amazon.co.uk/ClosedCube-Accuracy-Humidity-Temperature-Breakout/dp/B01N0WXCL6">UK</a>
+
+
+<a href="https://www.tindie.com/stores/closedcube/?ref=offsite_badges&utm_source=sellers_closedcube&utm_medium=badges&utm_campaign=badge_medium"><img src="https://d2ss6ovg47m0r5.cloudfront.net/badges/tindie-mediums.png" alt="I sell on Tindie" width="150" height="78"></a> 
+
 
 
 
