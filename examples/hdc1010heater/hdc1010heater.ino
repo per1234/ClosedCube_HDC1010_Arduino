@@ -19,6 +19,8 @@ MIT License
 #include <Wire.h>
 #include "ClosedCube_HDC1010.h"
 
+#define HDC1010_I2C_ADDRESS 0x48
+
 ClosedCube_HDC1010 hdc1010;
 
 void setup()
@@ -27,7 +29,7 @@ void setup()
 	Serial.println("ClosedCube HDC1010 [Heater] Arduino Test");
 	Serial.println();
 
-	hdc1010.begin(0x41);
+	hdc1010.begin(HDC1010_I2C_ADDRESS);
 
 	Serial.print("Manufacturer ID=0x");
 	Serial.println(hdc1010.readManufacturerId(), HEX); // 0x5449 ID of Texas Instruments
