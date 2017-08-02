@@ -8,6 +8,8 @@ This is breakout board for [Texas Instruments HDC1010](http://www.ti.com/product
 [![](https://github.com/closedcube/ClosedCube_HDC1010_Arduino/blob/master/images/B011_HDC1010_Pic1.jpg)](https://www.tindie.com/stores/closedcube/)
 [![](https://github.com/closedcube/ClosedCube_HDC1010_Arduino/blob/master/images/B011_HDC1010_Pic2.jpg)](https://www.tindie.com/stores/closedcube/)
 
+*Note:* HDC1010 sensor allows four different I2C addresses, please double-check ***HDC1010_I2C_ADDRESS*** constant in the code.
+
 ---
 ### Where to Buy?
 
