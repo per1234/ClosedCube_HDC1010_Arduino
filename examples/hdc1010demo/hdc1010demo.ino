@@ -19,7 +19,7 @@ MIT License
 #include "ClosedCube_HDC1010.h"
 #include <Wire.h>
 
-#include HDC1010_I2C_ADDRESS 0x48
+#define HDC1010_I2C_ADDRESS 0x48
 
 ClosedCube_HDC1010 hdc1010;
 
